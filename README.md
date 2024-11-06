@@ -11,9 +11,9 @@ SynCare is a digital healthcare platform that implements HL7 FHIR standards for 
 - [x] Create project directory structure (0.5 day)
 - [x] Initialize Git repository (0.5 day)
 - [ ] Setup backend environment (2-3 days)
-  - [ ] Initialize Node.js project
-  - [ ] Configure TypeScript
-  - [ ] Setup Express server
+  - [x ] Initialize Node.js project
+  - [ x] Configure TypeScript
+  - [x ] Setup Express server
   - [ ] Create basic health check endpoint
 - [ ] Configure environment variables (1 day)
   - [ ] Create .env file
