@@ -74,6 +74,9 @@ export class Patient {
     @Column('jsonb', { nullable: true })
     immunization_records!: ImmunizationRecords;
 
+    @Column({ default: true })
+    isActive!: boolean;
+
     constructor() {
         this.first_name = '';
         this.last_name = '';

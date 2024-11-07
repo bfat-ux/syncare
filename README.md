@@ -31,9 +31,9 @@ SynCare is a digital healthcare platform that implements HL7 FHIR standards for 
   - [x] Setup Practitioner resource
   - [x] Setup Schedule resource
   - [x] Setup Referral & DocumentReference resources
-  - [ ] Setup Coverage resource
-  - [ ] Setup Invoice resource
-  - [ ] Setup PriceComponent resource
+  - [x] Setup Coverage resource
+  - [x] Setup Invoice resource
+  - [x] Setup PriceComponent resource
 - [ ] API Development (3-4 days)
   - [ ] Create RESTful endpoints
   - [ ] Implement FHIR validation
