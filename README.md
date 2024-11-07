@@ -20,9 +20,9 @@ SynCare is a digital healthcare platform that implements HL7 FHIR standards for 
   - [x] Add .env.example template
 
 ### Phase 2: Backend Development (Weeks 2-3) 💽
-- [ ] Database Setup (3-4 days)
-  - [ ] Install PostgreSQL
-  - [ ] Configure database connection
+- [x ] Database Setup (3-4 days)
+  - [ x] Install PostgreSQL
+  - [ x] Configure database connection
   - [ ] Create initial schemas
 - [ ] FHIR Implementation (4-5 days)
   - [ ] Setup Patient resource
