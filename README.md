@@ -20,14 +20,20 @@ SynCare is a digital healthcare platform that implements HL7 FHIR standards for 
   - [x] Add .env.example template
 
 ### Phase 2: Backend Development (Weeks 2-3) 💽
-- [x ] Database Setup (3-4 days)
-  - [ x] Install PostgreSQL
-  - [ x] Configure database connection
-  - [ ] Create initial schemas
-- [ ] FHIR Implementation (4-5 days)
-  - [ ] Setup Patient resource
-  - [ ] Setup Appointment resource
-  - [ ] Setup Encounter resource
+- [x] Database Setup (3-4 days)
+  - [x] Install PostgreSQL
+  - [x] Configure database connection
+  - [x] Create initial schemas
+- [⏳] FHIR Implementation (4-5 days)
+  - [x] Setup Patient resource
+  - [x] Setup Appointment resource
+  - [x] Setup Encounter resource
+  - [x] Setup Practitioner resource
+  - [x] Setup Schedule resource
+  - [x] Setup Referral & DocumentReference resources
+  - [ ] Setup Coverage resource
+  - [ ] Setup Invoice resource
+  - [ ] Setup PriceComponent resource
 - [ ] API Development (3-4 days)
   - [ ] Create RESTful endpoints
   - [ ] Implement FHIR validation
@@ -91,3 +97,10 @@ Please read our contributing guidelines before submitting pull requests.
 
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Documentation
+
+- [FHIR Resource Mappings](docs/FHIR_MAPPINGS.md) - Database schema and FHIR resource mappings
+- [API Documentation](docs/api/) - API endpoints and usage
+- [Database Documentation](docs/database/) - Database design and ERD diagrams
+- [Setup Guides](docs/setup/) - Installation and deployment guides

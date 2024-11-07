@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@types/node": "^22.9.0",
+    "reflect-metadata": "^0.2.2",
+    "typeorm": "^0.3.20"
+  }
+}
