@@ -29,6 +29,63 @@ This document outlines the core FHIR resources and their database mappings for t
   - `medical_history` (JSONB)
   - `immunization_records` (JSONB)
 
+## PractitionerRole Resource
+- **Table**: `practitioner_roles`
+- **FHIR Resource**: PractitionerRole
+- **Fields**:
+  ```typescript
+  {
+    role_id: string;                      // PractitionerRole.identifier
+    practitioner_id: string;              // PractitionerRole.practitioner
+    role: string;                         // PractitionerRole.code
+    specialties?: string[];               // PractitionerRole.specialty
+    locations?: string[];                 // PractitionerRole.location
+  }
+  ```
+
+### Local Context Adaptations
+1. **Role Expansion**:
+   - Added support for `chew` (Community Health Extension Worker)
+   - Includes `nurse`, `doctor`, and other local roles
+
+2. **Specialties and Locations**:
+   - Supports multiple specialties per practitioner
+   - Tracks locations where practitioners can work
+
+## ServiceRequest Resource
+- **Table**: `service_requests`
+- **FHIR Resource**: ServiceRequest
+- **Fields**:
+  ```typescript
+  {
+    service_request_id: string;           // ServiceRequest.identifier
+    patient_id: string;                   // ServiceRequest.subject
+    practitioner_id: string;              // ServiceRequest.requester
+    service_details: {                    // ServiceRequest.code
+      category: string;
+      code: string;
+      description: string;
+      priority: string;                   // ServiceRequest.priority
+    };
+    status: string;                       // ServiceRequest.status
+    requested_date: Date;                 // ServiceRequest.authoredOn
+  }
+  ```
+
+### Local Context Adaptations
+1. **Flexible Practitioner Assignment**:
+   - Links to any practitioner type, including CHEWs and nurses
+   - Supports diverse healthcare service requests
+
+2. **Service Details**:
+   - Captures detailed service information
+   - Manages priority and status for various services
+
+### Implementation Notes
+- **Role and Service Flexibility**: Supports a wide range of healthcare roles and services, accommodating local healthcare structures.
+- **Integration with Local Systems**: Designed to integrate with local healthcare practices and roles, ensuring relevance and usability.
+
+
 ### Encounter Resource
 - **Table**: `encounters`
 - **Fields**:
