@@ -89,3 +89,25 @@ export const deletePatient = async (req: Request, res: Response): Promise<void> 
         res.status(500).json({ error: 'Failed to deactivate patient' });
     }
 };
+
+// Add this new function to get all patients
+export const getAllPatients = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const patientRepository = AppDataSource.getRepository(Patient);
+        const patients = await patientRepository.find({
+            order: {
+                created_at: 'DESC'
+            }
+        });
+        
+        // Set proper content type and formatting
+        res.setHeader('Content-Type', 'application/json');
+        res.status(200).send(JSON.stringify(patients, null, 2));
+    } catch (error) {
+        console.error('Error in getAllPatients:', error);
+        res.status(500).json({
+            error: 'Failed to fetch patients',
+            details: error instanceof Error ? error.message : 'Unknown error'
+        });
+    }
+};
