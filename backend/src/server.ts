@@ -1,7 +1,7 @@
 import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
 import { AppDataSource } from './config/database';
-import patientRoutes from './routes/patientRoutes';
+import routes from './routes/index';
 import "reflect-metadata";
 import { prettyJson } from './middleware/prettyJson';
 
@@ -23,7 +23,7 @@ app.use((req, res, next) => {
 });
 
 // Routes
-app.use('/api', patientRoutes);
+app.use('/api', routes);
 
 // Health check route
 app.get('/health', (req: Request, res: Response) => {

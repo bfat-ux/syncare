@@ -212,6 +212,40 @@ This document outlines the core FHIR resources and their database mappings for t
   }
   ```
 
+### Core Fields
+- `patient_id` (uuid) → Patient.id
+- `first_name` → Patient.name.given
+- `last_name` → Patient.name.family
+- `date_of_birth` → Patient.birthDate
+- `gender` → Patient.gender
+
+### Extensions
+- `contact_info` → Patient.contact
+  - Includes Nigeria-specific address format with LGA
+- `medical_history` → Patient.condition
+- `immunization_records` → Patient.immunization
+
+## Appointment Resource
+Maps to FHIR Appointment resource:
+
+### Core Fields
+- `appointment_id` → Appointment.id
+- `appointment_date` → Appointment.start
+- `start_time` → Appointment.start
+- `end_time` → Appointment.end
+- `appointment_status` → Appointment.status
+- `appointment_type` → Appointment.appointmentType
+
+## Encounter Resource
+Maps to FHIR Encounter resource:
+
+### Core Fields
+- `encounter_id` → Encounter.id
+- `date_of_visit` → Encounter.period.start
+- `reason_for_visit` → Encounter.reasonCode
+- `diagnosis` → Encounter.diagnosis
+- `treatment_plan` → CarePlan resource reference
+
 ## Local Context Adaptations
 
 ### Referral System Adaptations
