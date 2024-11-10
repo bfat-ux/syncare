@@ -1,15 +1,53 @@
-import express from 'express';
-const router = express.Router();
+import express, { Router, Request, Response } from 'express';
+import {
+    createPractitioner,
+    getAllPractitioners,
+    getPractitionerById,
+    updatePractitioner,
+    deletePractitioner
+} from '../controllers/practitionerController';
 
-// Basic CRUD routes for practitioners
-router.get('/', (req, res) => {
-    // TODO: Implement get all practitioners
-    res.send('Get all practitioners');
+const router: Router = express.Router();
+
+// CRUD routes for practitioners
+router.post('/', async (req: Request, res: Response) => {
+    try {
+        await createPractitioner(req, res);
+    } catch (error) {
+        res.status(500).json({ error: 'Internal server error' });
+    }
 });
 
-router.get('/:id', (req, res) => {
-    // TODO: Implement get practitioner by id
-    res.send('Get practitioner by id');
+router.get('/', async (req: Request, res: Response) => {
+    try {
+        await getAllPractitioners(req, res);
+    } catch (error) {
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+router.get('/:id', async (req: Request, res: Response) => {
+    try {
+        await getPractitionerById(req, res);
+    } catch (error) {
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+router.put('/:id', async (req: Request, res: Response) => {
+    try {
+        await updatePractitioner(req, res);
+    } catch (error) {
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+router.delete('/:id', async (req: Request, res: Response) => {
+    try {
+        await deletePractitioner(req, res);
+    } catch (error) {
+        res.status(500).json({ error: 'Internal server error' });
+    }
 });
 
 export default router;

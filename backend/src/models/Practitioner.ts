@@ -94,6 +94,9 @@ export class Practitioner {
         }[];
     };
 
+    @Column({ default: true })
+    isActive!: boolean;
+
     constructor() {
         // Initialize basic fields
         this.first_name = '';
