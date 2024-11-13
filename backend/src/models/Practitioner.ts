@@ -97,6 +97,9 @@ export class Practitioner {
     @Column({ default: true })
     isActive!: boolean;
 
+    @Column({ nullable: true })
+    license_number!: string;
+
     constructor() {
         // Initialize basic fields
         this.first_name = '';

@@ -1,5 +1,6 @@
 import { body, param } from 'express-validator';
 import { validateRequest } from './validateRequest';
+import { RequestHandler } from 'express';
 
 export const createPractitionerValidation = [
     body('first_name')
