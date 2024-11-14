@@ -8,6 +8,7 @@ import {
     JoinColumn
 } from "typeorm";
 import { Patient } from "./Patient";
+import { Practitioner } from "./Practitioner";
 
 // Define interfaces for complex types
 interface AppointmentParticipant {
@@ -41,8 +42,12 @@ export class Appointment {
     @JoinColumn({ name: 'patient_id' })
     patient!: Patient;
 
-    @Column('uuid', { nullable: true })
+    @Column('uuid')
     provider_id!: string;
+
+    @ManyToOne(() => Practitioner)
+    @JoinColumn({ name: 'provider_id' })
+    provider!: Practitioner;
 
     @Column({ type: 'timestamp' })
     appointment_date!: Date;

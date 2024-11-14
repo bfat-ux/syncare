@@ -6,6 +6,7 @@ import serviceRequestRoutes from './serviceRequestRoutes';
 import referralRoutes from './referralRoutes';
 import practitionerRoleRoutes from './practitionerRoleRoutes';
 import documentReferenceRoutes from './documentReferenceRoutes';
+import statsRoutes from './statsRoutes';
 
 const router = express.Router();
 
@@ -16,5 +17,5 @@ router.use('/service-requests', serviceRequestRoutes);
 router.use('/referrals', referralRoutes);
 router.use('/practitioner-roles', practitionerRoleRoutes);
 router.use('/document-references', documentReferenceRoutes);
-
+router.use('/stats', statsRoutes);
 export default router;

@@ -17,6 +17,19 @@ app.use((req, res, next) => {
     next();
 });
 
+// Root route
+app.get('/', (req, res) => {
+    res.json({
+        message: 'Welcome to SynCare API',
+        version: '1.0.0',
+        endpoints: {
+            health: '/health',
+            api: '/api',
+            docs: '/api-docs'  // if you plan to add Swagger/OpenAPI docs
+        }
+    });
+});
+
 // Routes
 app.use('/api', routes);
 
