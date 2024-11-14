@@ -1,24 +1,24 @@
 import { body, param } from 'express-validator';
 import { validateRequest } from './validateRequest';
-import { RequestHandler } from 'express';
 
 export const createPractitionerValidation = [
-    body('first_name')
+    body('name')
+        .isArray()
+        .withMessage('Name must be an array')
         .notEmpty()
-        .withMessage('First name is required')
-        .isString()
-        .withMessage('First name must be a string'),
+        .withMessage('At least one name is required'),
     
-    body('last_name')
+    body('name.*.family')
+        .isString()
+        .withMessage('Family name must be a string')
         .notEmpty()
-        .withMessage('Last name is required')
-        .isString()
-        .withMessage('Last name must be a string'),
+        .withMessage('Family name is required'),
     
-    body('specialization')
-        .optional()
-        .isString()
-        .withMessage('Specialization must be a string'),
+    body('name.*.given')
+        .isArray()
+        .withMessage('Given names must be an array')
+        .notEmpty()
+        .withMessage('At least one given name is required'),
     
     body('license_number')
         .notEmpty()
@@ -36,33 +36,6 @@ export const createPractitionerValidation = [
         .matches(/^\+?[\d\s-]+$/)
         .withMessage('Invalid phone number format'),
     
-    validateRequest,
-
-
-    body('specialty')
-        .optional()
-        .isString()
-        .withMessage('Specialty must be a string')
-        .isLength({ min: 2, max: 100 })
-        .withMessage('Specialty must be between 2 and 100 characters'),
-
-    body('contact_info.address')
-        .optional()
-        .isObject()
-        .withMessage('Address must be an object'),
-
-    body('contact_info.address.state')
-        .optional()
-        .isString()
-        .withMessage('State must be a string')
-        .isIn(['Lagos', 'Abuja', /* add other Nigerian states */])
-        .withMessage('Invalid Nigerian state'),
-
-    body('isActive')
-        .optional()
-        .isBoolean()
-        .withMessage('isActive must be a boolean'),
-
     validateRequest
 ];
 

@@ -13,7 +13,8 @@
     "typeorm": "typeorm-ts-node-commonjs",
     "migration:generate": "npm run typeorm migration:generate -- -d src/config/database.ts",
     "migration:run": "npm run typeorm migration:run -- -d src/config/database.ts",
-    "migration:revert": "npm run typeorm migration:revert -- -d src/config/database.ts"
+    "migration:revert": "npm run typeorm migration:revert -- -d src/config/database.ts",
+    "migration:create": "npm run typeorm migration:create"
   },
   "keywords": [],
   "author": "",

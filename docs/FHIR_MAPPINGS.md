@@ -317,3 +317,48 @@ The standard FHIR address datatype has been modified to better suit the Nigerian
 - JSONB fields are used for complex nested structures to maintain FHIR compliance
 - All relationships are maintained through UUID foreign keys
 - Enums are used where applicable to ensure data consistency
+
+## Validation Implementation
+
+### Request Validation
+All endpoints implement two-layer validation:
+
+1. **Express Validator**
+- Data type validation
+- Required fields
+- Format validation
+- Custom business rules
+
+2. **FHIR Compliance**
+- Resource structure validation
+- Required FHIR elements
+- Reference validation
+- FHIR R4 compliance
+
+### Example Validation Chain
+```typescript
+router.post('/', 
+    requestValidation,    // Express validator
+    fhirValidation,      // FHIR compliance
+    controller.handler    // Business logic
+);
+```
+
+### Validation Categories
+1. **Data Integrity**
+   - UUID formats
+   - Date formats
+   - Required fields
+   - Data types
+
+2. **Business Rules**
+   - Role permissions
+   - Status transitions
+   - Reference integrity
+   - Date ranges
+
+3. **FHIR Compliance**
+   - Resource structure
+   - Required elements
+   - Valid references
+   - Terminology binding

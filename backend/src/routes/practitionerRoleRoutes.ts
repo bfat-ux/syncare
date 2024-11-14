@@ -1,12 +1,14 @@
 import express, { Router, RequestHandler, Request, Response, NextFunction } from 'express';
 import { PractitionerRoleController } from '../controllers/practitionerRoleController';
 import { createPractitionerRoleValidation, updatePractitionerRoleValidation } from '../middleware/validation/practitionerRoleValidation';
+import { validateFHIRPractitionerRole } from '../middleware/validation/fhirValidation';
 
 const router: Router = express.Router();
 const practitionerRoleController = new PractitionerRoleController();
 
 router.post('/', 
     (createPractitionerRoleValidation as unknown as RequestHandler[]),
+    (validateFHIRPractitionerRole as RequestHandler),
     async (req: Request, res: Response, next: NextFunction) => {
         try {
             await practitionerRoleController.createPractitionerRole(req, res);
@@ -26,6 +28,7 @@ router.get('/:id', async (req, res) => {
 
 router.put('/:id',
     (updatePractitionerRoleValidation as unknown as RequestHandler[]),
+    (validateFHIRPractitionerRole as RequestHandler),
     async (req: Request, res: Response, next: NextFunction) => {
         try {
             await practitionerRoleController.updatePractitionerRole(req, res);

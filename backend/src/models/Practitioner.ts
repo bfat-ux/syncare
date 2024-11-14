@@ -46,11 +46,11 @@ export class Practitioner {
     @PrimaryGeneratedColumn('uuid')
     practitioner_id!: string;
 
-    @Column({ nullable: true })
-    first_name!: string;
-
-    @Column({ nullable: true })
-    last_name!: string;
+    @Column('jsonb')
+    name: {
+        family: string;
+        given: string[];
+    }[];
 
     @Column({
         type: 'enum',
@@ -102,8 +102,7 @@ export class Practitioner {
 
     constructor() {
         // Initialize basic fields
-        this.first_name = '';
-        this.last_name = '';
+        this.name = [{ family: '', given: [] }];
         this.user_role = 'doctor';
         this.specialty = '';
         this.status = 'active';
