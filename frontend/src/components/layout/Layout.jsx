@@ -1,14 +1,14 @@
 import Navbar from './Navbar';
+import Footer from './Footer';
 
 const Layout = ({ children }) => {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="flex flex-col min-h-screen bg-secondary">
       <Navbar />
-      <main className="w-full pt-20">
-        <div className="max-w-[1540px] mx-auto px-4 md:px-8">
-          {children}
-        </div>
+      <main className="flex-grow mt-[70px]">
+        {children}
       </main>
+      <Footer />
     </div>
   );
 };

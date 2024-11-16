@@ -1,8 +1,15 @@
-const Button = ({ children, onClick, className = "" }) => {
+const Button = ({ children, variant = 'primary', ...props }) => {
   return (
-    <button 
-      onClick={onClick}
-      className={`px-6 py-3 bg-primary text-white text-base font-normal hover:bg-opacity-90 hover:scale-105 rounded-full transition-all duration-300 ${className}`}
+    <button
+      {...props}
+      className={`
+        px-6 py-2 rounded-full font-medium transition-all duration-300
+        ${variant === 'primary' 
+          ? 'bg-gradient-to-r from-primary to-primary-light text-white hover:shadow-lg hover:from-primary-light hover:to-primary' 
+          : 'border-2 border-primary text-primary hover:bg-primary/5'
+        }
+        ${props.className || ''}
+      `}
     >
       {children}
     </button>
