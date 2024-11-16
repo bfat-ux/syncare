@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@types/node": "^22.9.0",
+    "figma-api": "^2.0.1-beta",
     "reflect-metadata": "^0.2.2",
     "typeorm": "^0.3.20"
   }
