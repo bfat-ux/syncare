@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
+import LoadingImage from '../common/LoadingImage';
 
 const HeroSection = ({ children }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -34,7 +36,6 @@ const HeroSection = ({ children }) => {
         style={{ animationDelay: '0.1s' }}
       >
         <div className="aspect-[4/3] w-full relative rounded-l-3xl overflow-hidden shadow-2xl">
-          {/* Loading placeholder */}
           <div 
             className={`absolute inset-0 bg-secondary-light/50 backdrop-blur-sm transition-opacity duration-300 ${
               imageLoaded ? 'opacity-0' : 'opacity-100'
@@ -42,20 +43,15 @@ const HeroSection = ({ children }) => {
           />
           
           <picture>
-            {/* Mobile version - smaller size */}
             <source
               media="(max-width: 768px)"
               srcSet="/src/assets/images/herosectionimg-mobile.webp"
               type="image/webp"
             />
-            
-            {/* Desktop version */}
             <source
               srcSet="/src/assets/images/herosectionimg.webp"
               type="image/webp"
             />
-            
-            {/* Fallback image */}
             <img
               className={`w-full h-full object-cover transition-opacity duration-300 ${
                 imageLoaded ? 'opacity-100' : 'opacity-0'
@@ -67,7 +63,6 @@ const HeroSection = ({ children }) => {
             />
           </picture>
 
-          {/* Optional: Subtle gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-secondary/20 to-transparent" />
         </div>
       </div>
@@ -90,6 +85,10 @@ const HeroSection = ({ children }) => {
       </div>
     </div>
   );
+};
+
+HeroSection.propTypes = {
+  children: PropTypes.node
 };
 
 export default HeroSection;

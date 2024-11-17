@@ -15,6 +15,7 @@ export default {
           DEFAULT: '#0C555F',
           light: '#1A8A99',
         },
+        background: '#ddfdfd',
         white: '#FFFFFF',
       },
       fontFamily: {

@@ -1,6 +1,6 @@
 import { Link, NavLink } from 'react-router-dom';
 import { useState } from 'react';
-import Button from '../common/Button';
+import Button from '../common/Button/Button';
 import logoIcon from '../../assets/icons/logoicon.png';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
