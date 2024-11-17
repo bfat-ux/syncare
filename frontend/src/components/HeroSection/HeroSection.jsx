@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import LoadingImage from '../common/LoadingImage';
+import AppointmentButton from '../../features/appointments/components/AppointmentButton';
 
 const HeroSection = ({ children }) => {
   const [imageLoaded, setImageLoaded] = useState(false);

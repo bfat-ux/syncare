@@ -1,6 +1,12 @@
 import { Link } from 'react-router-dom';
 import logoIcon from '../../assets/icons/logoicon.png';
 import { MapPinIcon } from '@heroicons/react/24/outline';
+import { 
+  ChatBubbleLeftIcon, // Facebook placeholder
+  CameraIcon,         // Instagram placeholder
+  BoltIcon,          // Twitter/X placeholder
+  LinkIcon           // LinkedIn placeholder
+} from '@heroicons/react/24/outline';
 import GoogleMap from '../../components/GoogleMap';
 
 const Footer = () => {
@@ -21,6 +27,21 @@ const Footer = () => {
             <p className="text-sm text-gray-300">
               Kids' Care Children's Hospital - Providing comprehensive pediatric care with love and expertise for your little ones.
             </p>
+            {/* Social Media Icons */}
+            <div className="flex gap-4 pt-2">
+              <Link to="#" className="text-gray-300 hover:text-primary-DEFAULT transition-colors">
+                <ChatBubbleLeftIcon className="w-6 h-6" />
+              </Link>
+              <Link to="#" className="text-gray-300 hover:text-primary-DEFAULT transition-colors">
+                <CameraIcon className="w-6 h-6" />
+              </Link>
+              <Link to="#" className="text-gray-300 hover:text-primary-DEFAULT transition-colors">
+                <BoltIcon className="w-6 h-6" />
+              </Link>
+              <Link to="#" className="text-gray-300 hover:text-primary-DEFAULT transition-colors">
+                <LinkIcon className="w-6 h-6" />
+              </Link>
+            </div>
           </div>
 
           {/* Medical Services */}
@@ -30,7 +51,6 @@ const Footer = () => {
               <li><Link to="/services/newborn-care" className="text-gray-300 hover:text-primary transition-colors">Newborn Care & Immunization</Link></li>
               <li><Link to="/services/general-pediatric" className="text-gray-300 hover:text-primary transition-colors">General Pediatrics</Link></li>
               <li><Link to="/services/specialized-consultations" className="text-gray-300 hover:text-primary transition-colors">Special Consultations</Link></li>
-              <li><Link to="/services/laboratory-diagnostics" className="text-gray-300 hover:text-primary transition-colors">Laboratory Services</Link></li>
             </ul>
           </div>
 
@@ -65,18 +85,18 @@ const Footer = () => {
           </div>
         </div>
 
-      {/* Google Maps */}
-      <div className="mt-8 max-w-4xl mx-auto">
-        <GoogleMap />
-      </div>
+        {/* Google Maps */}
+        <div className="mt-8 max-w-4xl mx-auto">
+          <GoogleMap />
+        </div>
 
-      {/* Copyright */}
-      <div className="mt-12 pt-8 border-t border-gray-700 text-center text-sm text-gray-400">
-        <p>© {new Date().getFullYear()} Kids' Care Children's Hospital. All rights reserved.</p>
+        {/* Copyright */}
+        <div className="mt-12 pt-8 border-t border-gray-700 text-center text-sm text-gray-400">
+          <p>© {new Date().getFullYear()} Kids' Care Children's Hospital. All rights reserved.</p>
+        </div>
       </div>
-    </div>
-  </footer>
-);
+    </footer>
+  );
 };
 
 export default Footer;

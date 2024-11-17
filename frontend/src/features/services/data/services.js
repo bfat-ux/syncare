@@ -1,25 +1,35 @@
 export const keyServices = [
-    {
-      icon: "stethoscope-icon",
-      title: "Regular Checkups",
-      description: "Comprehensive health monitoring for growing children"
-    },
-    {
-      icon: "vaccine-icon",
-      title: "Vaccinations",
-      description: "Complete immunization programs"
-    },
-    {
-      icon: "emergency-icon",
-      title: "Emergency Care",
-      description: "24/7 pediatric emergency services"
-    },
-    {
-      icon: "development-icon",
-      title: "Development Tracking",
-      description: "Monitoring growth and milestones"
-    }
-  ];
+  {
+    icon: "Stethoscope",
+    title: "General Pediatrics",
+    description: "Comprehensive healthcare for children from birth through adolescence."
+  },
+  {
+    icon: "Baby", 
+    title: "Newborn Care & Immunization",
+    description: "Complete vaccination programs and specialized newborn care services."
+  },
+  {
+    icon: "HeartPulse",
+    title: "Special Consultations",
+    description: "Expert consultations for complex pediatric conditions."
+  },
+  {
+    icon: "Clock",
+    title: "24/7 Emergency Care",
+    description: "Round-the-clock pediatric emergency services."
+  },
+  {
+    icon: "Syringe",
+    title: "Genetic Counseling",
+    description: "Professional guidance for genetic conditions and family planning."
+  },
+  {
+    icon: "GraduationCap",
+    title: "School Health",
+    description: "Comprehensive health support for school-age children."
+  }
+];
   
   export const whyChooseUs = [
     {

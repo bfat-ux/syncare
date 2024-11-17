@@ -1,6 +1,6 @@
 import { Link, NavLink } from 'react-router-dom';
 import { useState } from 'react';
-import Button from '../common/Button/Button';
+import AppointmentButton from '../../features/appointments/components/AppointmentButton';
 import logoIcon from '../../assets/icons/logoicon.png';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
@@ -78,7 +78,10 @@ const Navbar = () => {
               Contact Us
             </NavLink>
           </nav>
-          <Button>Appointment</Button>
+          <AppointmentButton 
+            type="navigation"
+            variant="primary"
+          />
         </div>
 
         {/* Mobile Navigation */}
@@ -129,9 +132,12 @@ const Navbar = () => {
               Contact Us
             </NavLink>
           </nav>
-          <Button className="w-[200px]" onClick={() => setIsMenuOpen(false)}>
-            Appointment
-          </Button>
+          <AppointmentButton 
+            type="navigation"
+            variant="primary"
+            className="w-[200px]"
+            onClick={() => setIsMenuOpen(false)}
+          />
         </div>
       </div>
     </header>
