@@ -3,10 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import api from '../api/api';
 import { appointmentServices } from '../data/appointmentConfig';
 
-const AppointmentForm = () => {
+const DEFAULT_PRACTITIONER_ID = 'default-practitioner-id';
+
+const AppointmentForm = ({ initialService = '', onSuccess }) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    serviceType: '',
+    serviceType: initialService,
     preferredDate: '',
     preferredTime: '',
     patientName: '',
@@ -31,12 +33,64 @@ const AppointmentForm = () => {
     setError(null);
 
     try {
-      await api.post('/appointments', formData);
-      navigate('/appointment/success');
+        // Log patient data being sent
+        const patientData = {
+            first_name: formData.patientName.split(' ')[0],
+            last_name: formData.patientName.split(' ')[1] || '',
+            contact_info: {
+                email: formData.patientEmail,
+                phone: formData.patientPhone
+            },
+            gender: 'unknown',
+            birth_date: null,
+            status: 'active'
+        };
+        console.log('Creating patient with data:', patientData);
+        
+        const patientResponse = await api.post('/patients', patientData);
+        console.log('Patient creation response:', patientResponse);
+
+        // Calculate appointment times
+        const startTime = new Date(`${formData.preferredDate} ${formData.preferredTime}`);
+        const endTime = new Date(startTime);
+        endTime.setHours(endTime.getHours() + 1);
+
+        // Log appointment data being sent
+        const appointmentData = {
+            appointment_date: new Date(formData.preferredDate).toISOString(),
+            start_time: startTime.toISOString(),
+            end_time: endTime.toISOString(),
+            appointment_status: 'scheduled',
+            appointment_type: 'routine',
+            provider_id: DEFAULT_PRACTITIONER_ID,
+            patient_id: patientResponse.data.patient_id,
+            details: {
+                notes: formData.notes || '',
+                priority: 0,
+                location: 'Main Clinic',
+                service_type: formData.serviceType
+            }
+        };
+        console.log('Creating appointment with data:', appointmentData);
+
+        const response = await api.post('/appointments', appointmentData);
+        console.log('Appointment creation response:', response);
+
+        if (response.status === 201) {
+            if (onSuccess) {
+                onSuccess();
+            }
+            navigate('/appointment/success');
+        }
     } catch (err) {
-      setError(err.response?.data?.message || 'Failed to book appointment');
+        console.error('Full error:', err);
+        const errorMessage = err.response?.data?.details || 
+                           err.response?.data?.error || 
+                           err.message ||
+                           'Failed to book appointment';
+        setError(errorMessage);
     } finally {
-      setLoading(false);
+        setLoading(false);
     }
   };
 

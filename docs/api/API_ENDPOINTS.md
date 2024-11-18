@@ -1,44 +1,65 @@
-# Available API Endpoints
+# API Endpoints Documentation
 
-## Patient Endpoints
-- GET `/api/patients` - Get all patients
-- GET `/api/patients/:id` - Get a specific patient
-- PUT `/api/patients/:id` - Update a patient
-- DELETE `/api/patients/:id` - Deactivate a patient
+## Base URL
+`http://localhost:3000/api`
 
-## Appointment Endpoints
-- GET `/api/appointments` - Get all appointments
-- GET `/api/appointments/:id` - Get a specific appointment
-- PUT `/api/appointments/:id` - Update an appointment
-- DELETE `/api/appointments/:id` - Delete an appointment
+## Authentication
+_Authentication documentation pending implementation_
 
-## Referral Endpoints
-- GET `/api/referrals` - Get all referrals
-- GET `/api/referrals/:id` - Get a specific referral
-- PUT `/api/referrals/:id` - Update a referral
+## Available Endpoints
 
-## Service Request Endpoints
-- GET `/api/service-requests` - Get all service requests
-- GET `/api/service-requests/:id` - Get specific service request
-- PUT `/api/service-requests/:id` - Update a service request
-- DELETE `/api/service-requests/:id` - Delete a service request
+### Patient Management
+- `GET /patients` - Get all patients
+- `POST /patients` - Create new patient
+- `GET /patients/:id` - Get patient by ID
+- `PUT /patients/:id` - Update patient
+- `DELETE /patients/:id` - Deactivate patient
 
-## PractitionerRole Endpoints
-- POST `/api/practitioner-roles` - Create a new practitioner role
-- GET `/api/practitioner-roles` - Get all practitioner roles
-- GET `/api/practitioner-roles/:id` - Get a specific practitioner role
-- PUT `/api/practitioner-roles/:id` - Update a practitioner role
-- DELETE `/api/practitioner-roles/:id` - Delete a practitioner role
+### Appointments
+- `GET /appointments` - List all appointments
+- `POST /appointments` - Create appointment
+- `GET /appointments/:id` - Get appointment details
+- `PUT /appointments/:id` - Update appointment
+- `PUT /appointments/:id/status` - Update appointment status
+- `DELETE /appointments/:id` - Cancel appointment
 
-## DocumentReference Endpoints
-- POST `/api/document-references` - Create a new document reference
-- GET `/api/document-references` - Get all document references
-- GET `/api/document-references/:id` - Get a specific document reference
-- PUT `/api/document-references/:id` - Update a document reference
-- DELETE `/api/document-references/:id` - Delete a document reference
+### Document References
+- `POST /document-references` - Create document reference
+- `GET /document-references` - List all documents
+- `GET /document-references/:id` - Get document details
+- `PUT /document-references/:id` - Update document
+- `DELETE /document-references/:id` - Delete document
 
-Each endpoint includes:
-- Request validation
-- FHIR compliance validation
-- Error handling
-- Proper HTTP status codes
+### Practitioners
+- `GET /practitioners` - List all practitioners
+- `POST /practitioners` - Register practitioner
+- `GET /practitioners/:id` - Get practitioner details
+- `PUT /practitioners/:id` - Update practitioner
+- `DELETE /practitioners/:id` - Deactivate practitioner
+
+### Invoicing
+- `POST /invoices` - Create invoice
+- `GET /invoices` - List all invoices
+- `GET /invoices/:id` - Get invoice details
+- `PUT /invoices/:id` - Update invoice
+- `PUT /invoices/:id/status` - Update payment status
+
+## Response Formats
+All endpoints return data in JSON format with the following structure:
+
+### Success Response
+```json
+{
+  "status": "success",
+  "data": { ... }
+}
+```
+
+### Error Response
+```json
+{
+  "status": "error",
+  "error": "Error message",
+  "details": "Additional error details"
+}
+```

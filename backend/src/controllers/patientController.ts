@@ -2,23 +2,36 @@ import { Request, Response } from 'express';
 import { AppDataSource } from '../config/database';
 import { Patient } from '../models/Patient';
 
+interface PatientResponse {
+    success: boolean;
+    patient_id: string;
+    message: string;
+}
+
 // Create a new patient
 export const createPatient = async (req: Request, res: Response): Promise<void> => {
     try {
         const patientRepository = AppDataSource.getRepository(Patient);
-        
-        // Log incoming data
-        console.log('Creating patient with data:', req.body);
-        
-        // Create and save patient
         const patient = patientRepository.create(req.body);
         const savedPatient = await patientRepository.save(patient);
         
-        console.log('Patient created successfully:', savedPatient);
-        res.status(201).json(savedPatient);
+        // Handle the case where savedPatient might be an array
+        const patientData = Array.isArray(savedPatient) ? savedPatient[0] : savedPatient;
+        
+        // Add debug logging
+        console.log('Saved patient:', patientData);
+        
+        const response: PatientResponse = {
+            success: true,
+            patient_id: patientData.patient_id,
+            message: 'Patient created successfully'
+        };
+
+        res.status(201).json(response);
     } catch (error) {
         console.error('Error in createPatient:', error);
         res.status(500).json({
+            success: false,
             error: 'Failed to create patient',
             details: error instanceof Error ? error.message : 'Unknown error'
         });

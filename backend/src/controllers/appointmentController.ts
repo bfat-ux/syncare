@@ -8,35 +8,47 @@ const validationService = new AppointmentValidationService();
 
 export const createAppointment = async (req: Request, res: Response): Promise<void> => {
     try {
-        const { provider_id, start_time, end_time } = req.body;
-
-        const timeErrors = validationService.validateAppointmentTimes(start_time, end_time);
-        if (timeErrors.length > 0) {
-            res.status(400).json({ errors: timeErrors });
-            return;
-        }
-
-        const hasConflicts = await validationService.checkForConflicts(
-            provider_id,
-            new Date(start_time),
-            new Date(end_time)
-        );
-
-        if (hasConflicts) {
-            res.status(409).json({ error: 'Time slot is already booked' });
-            return;
-        }
+        console.log('Received appointment request:', JSON.stringify(req.body, null, 2));
 
         const appointmentRepository = AppDataSource.getRepository(Appointment);
-        const appointment = appointmentRepository.create(req.body);
+        
+        // Validate required fields
+        const requiredFields = ['appointment_date', 'start_time', 'end_time', 'provider_id', 'patient_id'];
+        const missingFields = requiredFields.filter(field => !req.body[field]);
+        
+        if (missingFields.length > 0) {
+            res.status(400).json({
+                error: 'Missing required fields',
+                details: `Missing: ${missingFields.join(', ')}`
+            });
+            return;
+        }
+
+        // Create appointment with explicit typing
+        const appointmentData: Partial<Appointment> = {
+            appointment_date: new Date(req.body.appointment_date),
+            start_time: new Date(req.body.start_time),
+            end_time: new Date(req.body.end_time),
+            provider_id: req.body.provider_id,
+            patient_id: req.body.patient_id,
+            appointment_status: 'scheduled',
+            appointment_type: 'routine',
+            details: req.body.details || {}
+        };
+
+        console.log('Processed appointment data:', appointmentData);
+
+        const appointment = appointmentRepository.create(appointmentData);
         const savedAppointment = await appointmentRepository.save(appointment);
         
+        console.log('Saved appointment:', savedAppointment);
         res.status(201).json(savedAppointment);
     } catch (error) {
-        console.error('Error in createAppointment:', error);
+        console.error('Detailed error:', error);
         res.status(500).json({
             error: 'Failed to create appointment',
-            details: error instanceof Error ? error.message : 'Unknown error'
+            details: error instanceof Error ? error.message : 'Unknown error',
+            stack: error instanceof Error ? error.stack : undefined
         });
     }
 };

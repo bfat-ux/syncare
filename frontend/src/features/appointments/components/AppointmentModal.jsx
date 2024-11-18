@@ -1,5 +1,6 @@
 import { Dialog } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
+import AppointmentForm from './AppointmentForm';
 
 const AppointmentModal = ({ isOpen, onClose, serviceType = "" }) => {
   return (
@@ -30,8 +31,13 @@ const AppointmentModal = ({ isOpen, onClose, serviceType = "" }) => {
           </div>
 
           <div className="p-6">
-            {/* Placeholder for the appointment form */}
-            <p>Appointment form will go here</p>
+            <AppointmentForm 
+              initialService={serviceType}
+              onSuccess={() => {
+                onClose();
+                // Navigate to success page
+              }}
+            />
           </div>
         </Dialog.Panel>
       </div>
